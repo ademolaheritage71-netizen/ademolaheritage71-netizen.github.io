@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1010">
+  <meta name="description" content="Heritage Book Promotion helps authors build visibility for their books through thoughtful, reader-focused promotion.">
+  <title>Heritage Book Promotion | Your Story Deserves to Be Seen</title>
+  <style>
+    :root {
+      --ink: #0b1010;
+      --ink-2: #121b19;
+      --ink-3: #1c2924;
+      --gold: #d9b45b;
+      --gold-light: #f4d98a;
+      --paper: #f7f4ed;
+      --paper-2: #eee8dc;
+      --text: #17211e;
+      --muted: #b9c0b9;
+      --line: rgba(217,180,91,.25);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--text); background: var(--paper); font-family: var(--sans); line-height: 1.6; }
+    a { color: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .site-header { position: sticky; top: 0; z-index: 20; background: rgba(11,16,16,.96); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .nav-wrap { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; min-width: 220px; }
+    .brand-mark { width: 43px; height: 43px; color: var(--gold); flex: 0 0 auto; }
+    .brand-name { display: block; font-family: var(--serif); font-size: 1.1rem; line-height: 1.05; letter-spacing: .11em; text-transform: uppercase; }
+    .brand-sub { display: block; margin-top: 5px; color: var(--gold-light); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 25px; }
+    .nav-links a { color: #e7e9e4; text-decoration: none; font-size: .9rem; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta, .button { display: inline-flex; justify-content: center; align-items: center; gap: 9px; padding: 12px 19px; border: 1px solid var(--gold); border-radius: 5px; background: var(--gold); color: #17170f; font-weight: 700; text-decoration: none; transition: transform .2s, background .2s; }
+    .nav-cta:hover, .button:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .button-outline { background: transparent; color: var(--gold-light); }
+    .button-outline:hover { background: rgba(217,180,91,.1); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: transparent; color: white; border-radius: 5px; padding: 8px 11px; font-size: 1.1rem; }
+    .hero { position: relative; overflow: hidden; color: white; background: radial-gradient(ellipse at 78% 35%, rgba(135,92,36,.28), transparent 35%), linear-gradient(115deg, #0a0e0e 0%, #111a17 58%, #1b241d 100%); }
+    .hero:after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .17; background-image: repeating-linear-gradient(115deg, transparent 0 70px, rgba(255,255,255,.035) 71px 72px); }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 40px; min-height: 540px; padding-block: 72px; }
+    .eyebrow { color: var(--gold-light); font-size: .76rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.12; }
+    h1 { max-width: 660px; margin: 18px 0; font-size: clamp(2.8rem, 5.2vw, 4.7rem); letter-spacing: -.035em; }
+    h1 em { color: var(--gold-light); font-weight: 500; }
+    .hero-copy { max-width: 560px; color: #d8ddd7; font-size: 1.06rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 28px; }
+    .hero-note { margin-top: 18px; color: #aeb7ae; font-size: .82rem; }
+    .book-scene { position: relative; min-height: 370px; display: flex; align-items: center; justify-content: center; }
+    .glow { position: absolute; width: 290px; height: 290px; border-radius: 50%; background: rgba(215,166,72,.12); filter: blur(45px); }
+    .book-stack { position: relative; width: min(100%, 440px); transform: rotate(-2deg); }
+    .book { position: relative; display: flex; align-items: center; justify-content: center; min-height: 88px; margin-top: 7px; border: 1px solid rgba(255,255,255,.12); border-radius: 3px 8px 8px 3px; box-shadow: 0 13px 18px rgba(0,0,0,.25); font-family: var(--serif); font-size: clamp(1.2rem, 2.5vw, 1.7rem); letter-spacing: .12em; text-align: center; }
+    .book:before { content: ""; position: absolute; top: 0; bottom: 0; left: 16px; width: 2px; background: rgba(255,255,255,.18); }
+    .book small { display: block; font-family: var(--sans); font-size: .58rem; letter-spacing: .24em; margin-top: 5px; }
+    .book-one { color: #f5e6c2; background: linear-gradient(100deg, #24342c, #101a17); margin-left: 38px; }
+    .book-two { color: #362817; background: linear-gradient(100deg, #d8c6a4, #f0e4ca); margin-right: 23px; }
+    .book-three { color: #f1d28a; background: linear-gradient(100deg, #6e4528, #302116); margin-left: 7px; }
+    .book-four { color: #f0eadb; background: linear-gradient(100deg, #182b2c, #0d1718); margin-left: 50px; }
+    .book-caption { position: absolute; right: 0; bottom: -23px; color: #d3b66d; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; }
+    .trust-strip { background: var(--gold); color: #19190f; }
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-block: 17px; text-align: center; font-size: .86rem; font-weight: 700; }
+    .trust-grid span { display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+    .section { padding-block: 82px; }
+    .section-heading { max-width: 700px; margin: 0 auto 38px; text-align: center; }
+    .section-heading .eyebrow { color: #8b6a25; }
+    h2 { margin: 10px 0 14px; font-size: clamp(2rem, 3.3vw, 3rem); }
+    .section-heading p { margin: 0; color: #626b63; }
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .service-card { padding: 27px 24px; background: #fffdf8; border: 1px solid #e7dfd0; border-radius: 8px; transition: transform .2s, box-shadow .2s; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(31,36,28,.08); }
+    .service-icon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 18px; border-radius: 50%; background: #f4e8c8; color: #72551b; font-size: 1.3rem; }
+    .service-card h3 { margin: 0 0 9px; font-size: 1.27rem; }
+    .service-card p { margin: 0; color: #626b63; font-size: .94rem; }
+    .dark-section { background: var(--ink-2); color: white; }
+    .dark-section .section-heading p { color: #bdc6bd; }
+    .dark-section .section-heading .eyebrow { color: var(--gold-light); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .step { position: relative; text-align: center; padding: 8px 10px; }
+    .step-number { display: grid; place-items: center; width: 55px; height: 55px; margin: 0 auto 18px; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold-light); font-family: var(--serif); font-size: 1.25rem; }
+    .step h3 { margin: 0 0 9px; color: var(--gold-light); font-size: 1.2rem; }
+    .step p { margin: 0; color: #c2cbc3; font-size: .92rem; }
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 54px; align-items: center; }
+    .about-art { min-height: 310px; display: grid; place-items: center; border-radius: 10px; background: radial-gradient(circle at center, rgba(217,180,91,.17), transparent 54%), #e9e1d1; border: 1px solid #ded2bb; }
+    .about-art svg { width: min(65%, 230px); color: #8b6a25; }
+    .about-copy h2 { margin-top: 12px; }
+    .about-copy p { color: #59635b; }
+    .check-list { display: grid; gap: 11px; padding: 0; margin: 24px 0 0; list-style: none; }
+    .check-list li { display: flex; gap: 10px; align-items: flex-start; }
+    .check-list li:before { content: "✓"; color: #9c792c; font-weight: 900; }
+    .honesty-note { margin-top: 20px; padding: 15px 17px; border-left: 3px solid var(--gold); background: #f0e9dc; color: #535a51; font-size: .9rem; }
+    .contact-section { background: #eae3d6; }
+    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 50px; align-items: start; }
+    .contact-copy h2 { margin-top: 10px; }
+    .contact-copy p { color: #59635b; }
+    .contact-detail { display: flex; gap: 13px; margin-top: 20px; align-items: flex-start; }
+    .contact-detail .contact-icon { display: grid; place-items: center; flex: 0 0 42px; height: 42px; border-radius: 50%; background: #f8f3e9; color: #8a6720; }
+    .contact-detail strong { display: block; font-size: .92rem; }
+    .contact-detail a { color: #3c493f; overflow-wrap: anywhere; }
+    .contact-form { padding: 30px; border: 1px solid #ded3c0; border-radius: 10px; background: #fffdf8; box-shadow: 0 14px 35px rgba(41,39,30,.06); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    label { display: block; margin-bottom: 6px; font-size: .85rem; font-weight: 700; }
+    input, select, textarea { width: 100%; padding: 12px 13px; margin-bottom: 16px; border: 1px solid #d9d2c5; border-radius: 5px; background: #fff; color: #17211e; font: inherit; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid rgba(176,136,46,.35); border-color: #a88434; }
+    textarea { min-height: 125px; resize: vertical; }
+    .form-note { color: #70766e; font-size: .78rem; margin: 12px 0 0; }
+    .contact-form .button { width: 100%; cursor: pointer; font: inherit; font-weight: 700; }
+    .final-cta { position: relative; overflow: hidden; padding: 64px 20px; background: linear-gradient(110deg, #101816, #263027); color: white; text-align: center; }
+    .final-cta:before { content: "❧"; position: absolute; top: -95px; left: 6%; color: rgba(217,180,91,.1); font-size: 18rem; transform: rotate(-25deg); }
+    .final-cta h2 { position: relative; margin: 0 0 12px; }
+    .final-cta p { position: relative; color: #c6cec5; margin: 0 auto 24px; }
+    .final-cta .button { position: relative; }
+    footer { padding: 32px 0 20px; background: #080d0d; color: #d7ded6; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; gap: 25px; padding-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a { text-decoration: none; color: #c7cec6; font-size: .86rem; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .copyright { padding-top: 17px; color: #879187; font-size: .78rem; display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    @media (max-width: 850px) {
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: .82rem; }
+      .nav-cta { display: none; }
+      .hero-grid { gap: 18px; }
+      .services { grid-template-columns: repeat(2, 1fr); }
+      .about-grid, .contact-grid { gap: 30px; }
+    }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 30px, 520px); }
+      .nav-wrap { min-height: 70px; flex-wrap: wrap; padding-block: 10px; }
+      .brand { min-width: 0; }
+      .brand-name { font-size: .98rem; }
+      .brand-mark { width: 38px; height: 38px; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; width: 100%; padding: 5px 0 13px; flex-direction: column; align-items: flex-start; gap: 14px; }
+      .nav-links.open { display: flex; }
+      .hero-grid { grid-template-columns: 1fr; padding-block: 56px 45px; }
+      h1 { font-size: clamp(2.65rem, 12vw, 4rem); }
+      .book-scene { min-height: 280px; margin-top: 10px; }
+      .book { min-height: 62px; font-size: 1.1rem; }
+      .trust-grid { grid-template-columns: 1fr; gap: 9px; padding-block: 15px; }
+      .section { padding-block: 60px; }
+      .services { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; gap: 28px 14px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-art { min-height: 230px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .contact-form { padding: 22px; }
+      .footer-top { align-items: flex-start; flex-direction: column; }
+      .footer-links { gap: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *:before, *:after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="Heritage Book Promotion home">
+        <svg class="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 15C23 7 12 9 5 13v36c9-4 18-3 27 4V15Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M32 15c9-8 20-6 27-2v36c-9-4-18-3-27 4V15Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M12 20v22m7-23v21m26-21v21m7-22v22M27 23h-7m7 7h-7m24-7h-7m7 7h-7" stroke="currentColor" stroke-width="1.3" opacity=".8"/>
+          <path d="M32 8v7m-4-3 4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span><span class="brand-name">Heritage</span><span class="brand-sub">Book Promotion</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#services">Services</a><a href="#about">Our Approach</a><a href="#process">How It Works</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="#contact">Promote Your Book ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Thoughtful promotion for authors</div>
+          <h1>Your book deserves to be <em>seen.</em></h1>
+          <p class="hero-copy">You’ve put your heart into your story. We help you take the next step with reader-focused book promotion ideas designed to build visibility, strengthen your author presence, and introduce your work to more people.</p>
+          <div class="hero-actions">
+            <a class="button" href="#contact">Let’s Talk About Your Book <span aria-hidden="true">→</span></a>
+            <a class="button button-outline" href="#services">Explore Services</a>
+          </div>
+          <p class="hero-note">Personal communication. Creative ideas. A plan shaped around your book.</p>
+        </div>
+        <div class="book-scene" aria-label="Illustration of a stack of books">
+          <div class="glow"></div>
+          <div class="book-stack">
+            <div class="book book-one">WRITE</div>
+            <div class="book book-two">PUBLISH</div>
+            <div class="book book-three">PROMOTE</div>
+            <div class="book book-four">REACH READERS</div>
+            <div class="book-caption">Every story has a next chapter</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="container trust-grid">
+        <span>✦ Promotion shaped around your goals</span>
+        <span>✦ Clear communication from start to finish</span>
+        <span>✦ Respect for every author’s unique story</span>
+      </div>
+    </div>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">What we can help with</div>
+          <h2>Book promotion services</h2>
+          <p>Whether you’re preparing for launch or helping an existing title find new readers, we can discuss a promotion plan that fits your needs and budget.</p>
+        </div>
+        <div class="services">
+          <article class="service-card"><div class="service-icon" aria-hidden="true">✧</div><h3>Social Media Promotion</h3><p>Creative post concepts, book highlights, and promotional content to help introduce your book to relevant audiences.</p></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">▤</div><h3>Book Launch Support</h3><p>Plan launch messaging and promotional activities around your release date, genre, and goals.</p></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">✍</div><h3>Author Branding</h3><p>Present a consistent author identity with a clear bio, book descriptions, and reader-facing messaging.</p></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">◎</div><h3>Reader Outreach Ideas</h3><p>Explore suitable reader communities, book features, and outreach opportunities for your genre.</p></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">✉</div><h3>Promotional Copy</h3><p>Develop engaging copy for book announcements, email updates, social posts, and promotional campaigns.</p></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">✦</div><h3>Custom Promotion Plans</h3><p>Talk through your timeline, audience, and budget to identify a practical set of promotional next steps.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="process">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">A clear, collaborative process</div>
+          <h2>From your story to a plan</h2>
+          <p>Good promotion starts with understanding the book and the readers you hope to reach.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><div class="step-number">01</div><h3>Tell Us About Your Book</h3><p>Share the title, genre, release status, and what you’d like to achieve.</p></article>
+          <article class="step"><div class="step-number">02</div><h3>Discuss Your Goals</h3><p>We’ll learn about your audience, timeline, and promotional priorities.</p></article>
+          <article class="step"><div class="step-number">03</div><h3>Shape a Plan</h3><p>Review suggested services, deliverables, timing, and pricing before deciding.</p></article>
+          <article class="step"><div class="step-number">04</div><h3>Get Started Together</h3><p>If the plan is right for you, we’ll agree on the next steps and communication.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-art" aria-hidden="true">
+          <svg viewBox="0 0 220 220" fill="none">
+            <path d="M110 43C80 20 42 30 20 43v126c29-13 59-11 90 12V43Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M110 43c30-23 68-13 90 0v126c-29-13-59-11-90 12V43Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M39 66c18-7 34-4 51 5m-51 15c18-7 34-4 51 5m-51 15c18-7 34-4 51 5m91-45c-18-7-34-4-51 5m51 15c-18-7-34-4-51 5m51 15c-18-7-34-4-51 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+            <path d="M110 26v17m-8-8 8-9 8 9" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="about-copy">
+          <div class="eyebrow" style="color:#8b6a25">A reader-first mindset</div>
+          <h2>Every book has a story worth sharing.</h2>
+          <p>Heritage Book Promotion is built around a simple idea: authors deserve thoughtful communication and promotion that respects their work. We aim to help you present your book clearly, find suitable ways to talk about it, and make informed decisions about your next steps.</p>
+          <ul class="check-list">
+            <li>Plans discussed around your book, genre, and goals</li>
+            <li>Clear expectations before any work begins</li>
+            <li>Promotional ideas focused on relevant readers</li>
+            <li>Honest communication about what promotion can and cannot guarantee</li>
+          </ul>
+          <div class="honesty-note"><strong>Our promise:</strong> promotion can support visibility, but no ethical service can guarantee bestseller status, sales, reviews, or a specific number of readers.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy">
+          <div class="eyebrow" style="color:#8b6a25">Let’s talk books</div>
+          <h2>Tell us about your book.</h2>
+          <p>Use the form to introduce your project and what you have in mind. We’ll have the details needed to start a conversation about possible next steps.</p>
+          <div class="contact-detail"><span class="contact-icon" aria-hidden="true">✉</span><div><strong>Email</strong><a href="mailto:heritagea248@gmail.com">heritagea248@gmail.com</a></div></div>
+          <div class="contact-detail"><span class="contact-icon" aria-hidden="true">☎</span><div><strong>Phone / WhatsApp</strong><a href="https://wa.me/2349125583515" target="_blank" rel="noopener noreferrer">09125583515</a></div></div>
+          <p style="font-size:.86rem;margin-top:22px">Not ready to fill out the form? You can email us directly and include your book title and genre.</p>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div><label for="name">Your name *</label><input id="name" name="name" autocomplete="name" required placeholder="Author name"></div>
+            <div><label for="email">Your email *</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+          </div>
+          <div class="form-row">
+            <div><label for="bookTitle">Book title</label><input id="bookTitle" name="bookTitle" placeholder="Your book’s title"></div>
+            <div><label for="genre">Book genre</label><select id="genre" name="genre"><option value="">Choose a genre</option><option>Fiction / Novel</option><option>Romance</option><option>Fantasy / Science Fiction</option><option>Mystery / Thriller</option><option>Children’s Books</option><option>Non-fiction</option><option>Poetry</option><option>Other</option></select></div>
+          </div>
+          <label for="goal">What kind of promotion are you interested in? *</label>
+          <select id="goal" name="goal" required><option value="">Choose a service</option><option>Social media promotion</option><option>Book launch support</option><option>Author branding</option><option>Reader outreach ideas</option><option>Promotional copy</option><option>Custom promotion plan</option><option>Not sure yet — let’s discuss</option></select>
+          <label for="message">Tell us a little more *</label>
+          <textarea id="message" name="message" required placeholder="Your book, goals, launch date (if any), and what you hope to achieve..."></textarea>
+          <button class="button" type="submit">Prepare My Inquiry ↗</button>
+          <p class="form-note">This form opens an email draft addressed to Heritage Book Promotion. Please review and send the email to submit your inquiry.</p>
+          <p id="formStatus" class="form-note" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <h2>Your next chapter starts with a conversation.</h2>
+        <p>Tell us what you’ve written and where you’d like your book to go.</p>
+        <a class="button" href="#contact">Let’s Promote Your Book →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <a class="brand" href="#home">
+          <svg class="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 15C23 7 12 9 5 13v36c9-4 18-3 27 4V15Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M32 15c9-8 20-6 27-2v36c-9-4-18-3-27 4V15Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M32 8v7m-4-3 4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><span class="brand-name">Heritage</span><span class="brand-sub">Book Promotion</span></span>
+        </a>
+        <nav class="footer-links" aria-label="Footer navigation"><a href="#services">Services</a><a href="#about">Our Approach</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
+      </div>
+      <div class="copyright"><span>© <span id="year"></span> Heritage Book Promotion. All rights reserved.</span><span>Thoughtful promotion for stories worth sharing.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      menuToggle.textContent = open ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open navigation menu');
+      menuToggle.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const form = new FormData(this);
+      const subject = `Book promotion inquiry${form.get('bookTitle') ? ': ' + form.get('bookTitle') : ''}`;
+      const body = [
+        `Name: ${form.get('name')}`,
+        `Reply email: ${form.get('email')}`,
+        `Book title: ${form.get('bookTitle') || 'Not provided'}`,
+        `Genre: ${form.get('genre') || 'Not provided'}`,
+        `Interested in: ${form.get('goal')}`,
+        '',
+        'Message:',
+        form.get('message')
+      ].join('\n');
+      const mailto = `mailto:heritagea248@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      document.getElementById('formStatus').textContent = 'Your email app should open with your inquiry ready. Please send the email to complete your submission.';
+      window.location.href = mailto;
+    });
+  </script>
+</body>
+</html>
